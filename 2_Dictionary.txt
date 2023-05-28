@@ -1,0 +1,27 @@
+def get_file_type(extension_type_str, filenames):
+    extension_type_pairs = extension_type_str.split(';')
+    extension_type_dict = {}
+
+    # Create a dictionary of extension-type pairs
+    for pair in extension_type_pairs:
+        extension, file_type = pair.split(',')
+        extension_type_dict[extension] = file_type
+
+    file_types = []
+    for filename in filenames:
+        if '.' in filename:
+            extension = filename.split('.')[-1]
+            file_type = extension_type_dict.get(extension)
+            file_types.append(file_type)
+        else:
+            file_types.append("Unknown")
+
+    return file_types
+
+
+# Example usage
+extension_type_str = "xls,spreadsheet;xlsx,spreadsheet;jpg,image"
+filenames = ["abc.html", "xyz.xls", "text.csv", "123"]
+
+file_types = get_file_type(extension_type_str, filenames)
+print(file_types)
